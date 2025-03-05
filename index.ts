@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -9,7 +8,7 @@ import db from './src/init/db';
 
 
 dotenv.config();
-
+const PORT = 4000
 
 const app: Express = express();
 
@@ -17,7 +16,7 @@ const app: Express = express();
 const corsOptions = {
   origin: 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'], 
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 // Apply CORS middleware before any routes
@@ -39,8 +38,8 @@ app.all('*', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log(`⚡️ [server]: Server is running at https://localhost:${3000}`);
+app.listen(PORT, () => {
+  console.log(`⚡️ [server]: Server is running at http://localhost:${PORT}`);
 });
 export default app;
 

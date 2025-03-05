@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 import jwt, { TokenExpiredError } from 'jsonwebtoken';
-import User, { UserModel } from '../../models/user.model'; // Import UserDocument
+import User, { UserModel } from '../../models/user.model'; 
 
 export const verifyJWT = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -35,7 +35,7 @@ export const verifyJWT = async (req: Request, res: Response, next: NextFunction)
       }
 
       req.body.currentUserId = user._id;
-      (req as Request & { user: UserModel }).user = user; // ✅ Fix for TypeScript
+      (req as Request & { user: UserModel }).user = user;
 
       next();
     });

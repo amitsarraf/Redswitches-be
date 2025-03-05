@@ -10,7 +10,6 @@ export const getAccessToken = (email: string, firstName?: string, lastName?: str
     throw new Error('ACCESS_TOKEN_SECRET is not defined');
   }
 
-  // Explicitly define the options type
   const options: SignOptions = { expiresIn };
 
   const accessToken = jwt.sign({ data }, process.env.ACCESS_TOKEN_SECRET as string, options);
@@ -26,7 +25,6 @@ export const getRefreshToken = (email: string, firstName?: string, lastName?: st
     throw new Error('ACCESS_TOKEN_SECRET is not defined');
   }
 
-  // Explicitly define the options type
   const options: SignOptions = { expiresIn };
 
   const refreshToken = jwt.sign({ data }, process.env.ACCESS_TOKEN_SECRET as string, options);
