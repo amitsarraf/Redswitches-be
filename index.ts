@@ -4,7 +4,7 @@ import cors from 'cors';
 import { verifyJWT } from './src/mvc/middlewares/auth';
 import authRoute from './src/mvc/routes/auth.routes';
 import userRoute from './src/mvc/routes/user.routes';
-import db from './src/init/db';
+import mongoose from 'mongoose';
 
 
 dotenv.config();
@@ -21,10 +21,21 @@ const corsOptions = {
 
 // Apply CORS middleware before any routes
 app.use(cors(corsOptions));
-db()
 app.use(express.json());
 app.use('/api', authRoute);
 app.use('/api', verifyJWT, userRoute);
+
+
+mongoose.set('strictQuery', false);
+
+const mongoURI = process.env.DATABASE_URL;
+
+mongoose.connect(mongoURI as string);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection failed'));
+db.once('open', async () => {
+  console.log('Database conencted successfully!');
+});
 
 app.get('/', (req, res) => {
   res.send('Server is calling ');
